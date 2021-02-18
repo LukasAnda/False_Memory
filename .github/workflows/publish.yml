@@ -39,6 +39,11 @@ jobs:
           cd css
           find . -type f ! -name '*.min.css' -delete
 
+      - name: Edit index.html
+        run: |
+          sed -i 's/falseMemory\.js/falseMemory\.min\.js/' index.html
+          sed -i 's/style\.css/style\.min\.css/' index.html
+
       - name: Commit files
         run: |
           git add .
