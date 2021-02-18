@@ -65,7 +65,7 @@ var correctWordsCount = 0;
 var regularDistractorsCount = 0;
 var specialDistractorsCount = 0;
 
-$(function () {
+$(document).ready(function () {
     var sexDiv = $('#sex');
     var ageDiv = $('#age');
     var educationDiv = $('#education');
