@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="js/bootstrap.min.js"></script>
+    <title> Falošná pamäť </title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="body">
+    <div class="container">
+        <h1>Falošná pamäť </h1>
+        <div id="obsah">
+            <p>Dobrý deň,</p>
+            <p>Vvolám sa Natália Bačová a som študentkou 2. ročníka magisterského štúdia na Univerzite Komenského v
+                Bratislave, kde študujem psychológiu.</p>
+            <p>Vitajte v online laboratóriu. Test, ktorý budete dnes vykonávať, bude zameraný na testovanie pamäťových
+                schopností detí a dospelých. Vašimi výsledkami mi pomôžete získať dáta, ktoré sú potrebné pre môj výskum
+                v práci.</p>
+            <p><u>Inštrukcie k testu:</u> po každom stlačení tlačidla ŠTART sa Vám zobrazia slová, 1 slovo za 1 sekundu.
+                Potom sa zobrazia tlačidlá so slovami – vašou úlohou bude označiť tie slová, ktoré ste si zapamätali pri
+                ich zobrazovaní, na poradí nezáleží. Ak už nejaké slovo stlačíte, nedá sa to zmeniť, preto buďte prosím
+                pri ich výbere ostražití. Test obsahuje 6 pokusov a odhadovaný čas testu je 10-15 minút. Po skončení
+                testu sa Vám zobrazia Vaše výsledky spracované v grafe, ktoré sa následne pošlú na môj mail. Prosím
+                rodičov, aby nepomáhali svojim deťom pri vypĺňaní tohto testu, nakoľko by to mohlo skresliť výsledky.
+            </p>
+            <p>Máte právo požadovať informácie týkajúce sa výsledkov a výstupov výskumu. Pre ďalšie informácie a
+                objasnenie štúdie je možné ma kontaktovať na email: bacova52@uniba.sk, kde Vám budem k dispozícii.</p>
+            <p>Participácia na výskume je dobrovoľná a bez poplatkov. Získané informácie budú bezpečne uložené,
+                anonymita bude garantovaná a dáta budú použité výlučne na výskumné účely.</p>
+        </div>
+        <div id="agreement">
+            <h5>Radi by sme Vás požiadali o súhlas participovať na výskume prostredníctvom označenia nasledovnej
+                možnosti</h5>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="testAgreement"
+                       onchange="showAndScrollToElement($('#sex'))">
+                <label class="form-check-label" for="testAgreement">
+                    Súhlasím s participovaním na teste
+                </label>
+            </div>
+        </div>
+        <div class="baseContainer" id="sex">
+            <h5>Pohlavie</h5>
+        </div>
+        <div class="baseContainer" id="age">
+            <h5>Vek</h5>
+        </div>
+        <div class="baseContainer" id="education">
+            <h5>Aké je vaše najvyššie dosiahnuté vzdelanie?</h5>
+        </div>
+        <div class="baseContainer" id="testContainer">
+            <div class="col-sm-12 canvas-block">
+                <canvas id="canvas" onclick="" width="500" height="400"></canvas>
+            </div>
+            <div class="container" id="buttonsContainer"></div>
+            <div class="button-start col-sm-12">
+                <button class="btn" id="startExperiment" onclick="beginExperiment()">Štart</button>
+            </div>
+        </div>
+        <div style="height: 600px"></div>
+    </div>
+</div>
+<script src="js/falseMemory.js"></script>
+</body>
+</html>
