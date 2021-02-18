@@ -44,7 +44,15 @@ var specialDistractors = [
 ];
 
 var sex = ['muž', 'žena'];
-var age = ['11-14', '15-18', '19-25', '26-45', '46-65'];
+var age = ['6-11 rokov',
+    '12-15 rokov',
+    '15-18 rokov',
+    '19-25 rokov',
+    '25-45 rokov',
+    '45-65 rokov',
+    '65-80 rokov',
+    'nad 80 rokov'
+];
 var education = [
     'Bez vzdelania alebo neúplné základné vzdelanie (stále študujem na základnej škole)',
     'Základné',
@@ -56,7 +64,7 @@ var education = [
 
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
-ctx.font = "30pt Arial";
+ctx.font = "18pt Arial";
 ctx.textAlign = "center";
 
 var questionSetIndex = 0;
@@ -140,7 +148,7 @@ function showWord(index, setIndex) {
 }
 
 function showButtons(setIndex) {
-    setTextToCanvas("Pre začatie stlačte ŠTART");
+    setTextToCanvas("Označte slová a kliknite na tlačidlo ŠTART");
 
     $("#buttonsContainer").fadeIn('fast');
     for (var i = 0; i < 4; i++) {
@@ -156,17 +164,17 @@ function evaluateButton(id) {
     document.getElementById(id).disabled = true;
     var buttonValue = document.getElementById(id).innerHTML;
 
-    correctRepeatedWords[questionSetIndex-1].forEach(word => {
+    correctRepeatedWords[questionSetIndex - 1].forEach(word => {
         if (word === buttonValue) {
             correctWordsCount++;
         }
     });
-    regularDistractors[questionSetIndex-1].forEach(word => {
+    regularDistractors[questionSetIndex - 1].forEach(word => {
         if (word === buttonValue) {
             regularDistractorsCount++;
         }
     });
-    specialDistractors[questionSetIndex-1].forEach(word => {
+    specialDistractors[questionSetIndex - 1].forEach(word => {
         if (word === buttonValue) {
             specialDistractorsCount++;
         }
