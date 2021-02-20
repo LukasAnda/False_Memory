@@ -73,6 +73,7 @@ var correctWordsCount = 0;
 var regularDistractorsCount = 0;
 var specialDistractorsCount = 0;
 
+
 $(document).ready(function () {
     var sexDiv = $('#sex');
     var ageDiv = $('#age');
@@ -122,7 +123,119 @@ $(document).ready(function () {
     setTextToCanvas("Pre začatie stlačte ŠTART");
 });
 
+function finishExperiment() {
+    hideButtons();
+    $('#canvas').hide();
+    $('#graph').fadeIn('fast');
+    $('#graphDescription').fadeIn('fast');
+    document.getElementById('startExperiment').innerHTML = 'Odoslať výsledky';
+
+    var c = document.getElementById("resultGraph").getContext("2d");
+
+    var data = {
+        labels: ['Správne zopakované slová', 'Normálne distraktory', 'Špeciálne distraktory'],
+        datasets: [
+            {
+                fillColor: "rgba(52,40,255,1)",
+                strokeColor: "rgba(52,40,255,1)",
+                pointColor: "rgba(52,40,255,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [
+                    (Math.round((correctWordsCount * 100.0 / correctRepeatedWords.flat().length) * 100) / 100).toFixed(2),
+                    (Math.round((regularDistractorsCount * 100.0 / regularDistractors.flat().length) * 100) / 100).toFixed(2),
+                    (Math.round((specialDistractorsCount * 100.0 / specialDistractors.flat().length) * 100) / 100).toFixed(2)
+                ]
+            }
+        ]
+    };
+
+    var newopts = {
+        inGraphDataShow: true,
+        datasetFill: true,
+        scaleLabel: "<%=value%>",
+        scaleTickSizeRight: 5,
+        scaleTickSizeLeft: 5,
+        scaleTickSizeBottom: 5,
+        scaleTickSizeTop: 5,
+        scaleFontSize: 16,
+        scaleOverride: true,
+        scaleSteps: 10,
+        scaleStepWidth: 10,
+        scaleStartValue: 0,
+        canvasBorders: true,
+        canvasBordersWidth: 3,
+        canvasBordersColor: "black",
+        graphTitle: "Falošná pamäť",
+        graphTitleFontFamily: "'Arial'",
+        graphTitleFontSize: 24,
+        graphTitleFontStyle: "bold",
+        graphTitleFontColor: "#666",
+        legend: true,
+        legendFontFamily: "'Arial'",
+        legendFontSize: 12,
+        legendFontStyle: "normal",
+        legendFontColor: "#666",
+        yAxisLabel: "Úspešnosť v %",
+        yAxisFontFamily: "'Arial'",
+        yAxisFontSize: 16,
+        yAxisFontStyle: "normal",
+        yAxisFontColor: "#666"
+    };
+
+    new Chart(c).Bar(data, newopts);
+}
+
+function sendResults() {
+    var formData = {};
+    formData.name = '';
+    formData.message = `
+    Pohlavie: ${$('input[name=sex]:checked').val()}
+    Veková skupina: ${$('input[name=age]:checked').val()}
+    Vzdelanie: ${$('input[name=education]:checked').val()}
+    Štatistika: 
+    Správne zopakované slová: ${correctWordsCount}/${correctRepeatedWords.flat().length} -> ${(Math.round((correctWordsCount * 100.0 / correctRepeatedWords.flat().length) * 100) / 100).toFixed(2)},
+    Normálne distraktory: ${regularDistractorsCount}/${regularDistractors.flat().length} -> ${(Math.round((regularDistractorsCount * 100.0 / regularDistractors.flat().length) * 100) / 100).toFixed(2)}, 
+    Špeciálne distraktory: ${specialDistractorsCount}/${specialDistractors.flat().length} -> ${(Math.round((specialDistractorsCount * 100.0 / specialDistractors.flat().length) * 100) / 100).toFixed(2)}
+    `;
+    formData.email = '';
+    formData.formDataNameOrder = '["name","message","email"]';
+    formData.formGoogleSheetName = 'responses';
+    formData.formGoogleSendEmail = 'false.memory@test.com';
+
+    console.log(formData);
+
+    var url = 'https://script.google.com/macros/s/AKfycbyN2TZHPRxM2sxVr7vr2Dh-IJXPVsgYlbEYUuyXLJMRZCnyHIA/exec';
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    // xhr.withCredentials = true;
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        console.log(xhr.status, xhr.statusText);
+        console.log(xhr.responseText);
+        $('#thankYou').show('fast');
+        return;
+    };
+    // url encode form data for sending as post data
+    var encoded = Object.keys(formData).map(function (k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(formData[k]);
+    }).join('&');
+    xhr.send(encoded);
+}
+
 function beginExperiment() {
+    if (questionSetIndex === keywords.length) {
+        finishExperiment();
+        questionSetIndex += 1;
+        return;
+    }
+
+    if (questionSetIndex === keywords.length + 1) {
+        sendResults();
+        return;
+    }
+
     $("html, body").animate({scrollTop: $('#testContainer').offset().top}, 600);
     showWord(0, questionSetIndex);
     questionSetIndex += 1;
@@ -142,13 +255,18 @@ function showWord(index, setIndex) {
         // Show word
         setTextToCanvas(keywords[setIndex][index]);
         // Proceed to next word
-        setTimeout(showWord.bind(null, index + 1, setIndex), 1000);
+        setTimeout(showWord.bind(null, index + 1, setIndex), 100);
 
     }
 }
 
 function showButtons(setIndex) {
-    setTextToCanvas("Označte slová a kliknite na tlačidlo ŠTART");
+    if (questionSetIndex === keywords.length) {
+        setTextToCanvas("Označte slová a ukončite tlačidlom KONIEC");
+        document.getElementById('startExperiment').innerHTML = 'KONIEC'
+    } else {
+        setTextToCanvas("Označte slová a kliknite na tlačidlo ŠTART");
+    }
 
     $("#buttonsContainer").fadeIn('fast');
     for (var i = 0; i < 4; i++) {
@@ -179,8 +297,6 @@ function evaluateButton(id) {
             specialDistractorsCount++;
         }
     });
-
-    console.log(`Correct words: ${correctWordsCount}, regular distractors: ${regularDistractorsCount}, special distractors: ${specialDistractorsCount}`)
 }
 
 function hideButtons() {
