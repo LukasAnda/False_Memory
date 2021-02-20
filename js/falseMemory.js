@@ -255,7 +255,7 @@ function showWord(index, setIndex) {
         // Show word
         setTextToCanvas(keywords[setIndex][index]);
         // Proceed to next word
-        setTimeout(showWord.bind(null, index + 1, setIndex), 100);
+        setTimeout(showWord.bind(null, index + 1, setIndex), 1000);
 
     }
 }
