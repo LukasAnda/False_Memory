@@ -73,6 +73,8 @@ var correctWordsCount = 0;
 var regularDistractorsCount = 0;
 var specialDistractorsCount = 0;
 
+var timeInterval = 1000;
+
 
 $(document).ready(function () {
     var sexDiv = $('#sex');
@@ -189,18 +191,13 @@ function finishExperiment() {
 
 function sendResults() {
     var formData = {};
-    formData.name = '';
-    formData.message = `
-    Pohlavie: ${$('input[name=sex]:checked').val()}
-    Veková skupina: ${$('input[name=age]:checked').val()}
-    Vzdelanie: ${$('input[name=education]:checked').val()}
-    Štatistika: 
-    Správne zopakované slová: ${correctWordsCount}/${correctRepeatedWords.flat().length} -> ${(Math.round((correctWordsCount * 100.0 / correctRepeatedWords.flat().length) * 100) / 100).toFixed(2)},
-    Normálne distraktory: ${regularDistractorsCount}/${regularDistractors.flat().length} -> ${(Math.round((regularDistractorsCount * 100.0 / regularDistractors.flat().length) * 100) / 100).toFixed(2)}, 
-    Špeciálne distraktory: ${specialDistractorsCount}/${specialDistractors.flat().length} -> ${(Math.round((specialDistractorsCount * 100.0 / specialDistractors.flat().length) * 100) / 100).toFixed(2)}
-    `;
-    formData.email = '';
-    formData.formDataNameOrder = '["name","message","email"]';
+    formData.sex = $('input[name=sex]:checked').val();
+    formData.age = $('input[name=age]:checked').val();
+    formData.education = $('input[name=education]:checked').val();
+    formData.correct = `${(Math.round((correctWordsCount * 100.0 / correctRepeatedWords.flat().length) * 100) / 100).toFixed(2)}%`;
+    formData.normal = `${(Math.round((regularDistractorsCount * 100.0 / regularDistractors.flat().length) * 100) / 100).toFixed(2)}%`;
+    formData.special = `${(Math.round((specialDistractorsCount * 100.0 / specialDistractors.flat().length) * 100) / 100).toFixed(2)}%`;
+    formData.formDataNameOrder = '["sex","age","education", "correct", "normal", "special"]';
     formData.formGoogleSheetName = 'responses';
     formData.formGoogleSendEmail = 'false.memory@test.com';
 
@@ -255,7 +252,7 @@ function showWord(index, setIndex) {
         // Show word
         setTextToCanvas(keywords[setIndex][index]);
         // Proceed to next word
-        setTimeout(showWord.bind(null, index + 1, setIndex), 1000);
+        setTimeout(showWord.bind(null, index + 1, setIndex), timeInterval);
 
     }
 }
