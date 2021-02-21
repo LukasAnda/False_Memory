@@ -129,7 +129,7 @@ function finishExperiment() {
     hideButtons();
     $('#canvas').hide();
     $('#graph').fadeIn('fast');
-    $('#graphDescription').fadeIn('fast');
+    $('#thankYou').fadeIn('fast');
     document.getElementById('startExperiment').innerHTML = 'Odoslať výsledky';
 
     var c = document.getElementById("resultGraph").getContext("2d");
@@ -154,6 +154,7 @@ function finishExperiment() {
     };
 
     var newopts = {
+        responsive: true,
         inGraphDataShow: true,
         datasetFill: true,
         scaleLabel: "<%=value%>",
@@ -211,7 +212,7 @@ function sendResults() {
     xhr.onreadystatechange = function () {
         console.log(xhr.status, xhr.statusText);
         console.log(xhr.responseText);
-        $('#thankYou').show('fast');
+        $('#sendingSuccess').fadeIn('slow');
         return;
     };
     // url encode form data for sending as post data
@@ -219,6 +220,7 @@ function sendResults() {
         return encodeURIComponent(k) + "=" + encodeURIComponent(formData[k]);
     }).join('&');
     xhr.send(encoded);
+    document.getElementById('startExperiment').disabled = true;
 }
 
 function beginExperiment() {

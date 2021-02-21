@@ -55,17 +55,27 @@
                 <canvas id="canvas" onclick="" width="500" height="400"></canvas>
             </div>
             <div class="container" id="buttonsContainer"></div>
-            <div class="baseContainer" id="graphDescription">
-                <h4>Vaše výsledky:</h4>
+            <div id="thankYou" style="display: none">
+                <p>Milé účastníčky, milí účastníci testu,</p>
+
+                <p>ďakujeme za Vašu ochotu a pomoc. Možno ste si všimli, že slová zobrazované v jednotlivých pokusoch
+                    boli významovo príbuzné.
+                    Na konci každého pokusu sa zobrazila tabuľka slov a bolo treba rozhodnúť, ktoré to boli slová. V
+                    tabuľke však boli aj nové nepríbuzné slová
+                    (normálne distraktory) a jedno nové výrazne príbuzné slovo (špeciálny distraktor). Ak ste sa
+                    rozhodli aj pre toto slovo, generovali ste niečo,
+                    čomu hovoríme falošná pamäť. Tento iluzívny fenomén je prekvapujúco silný, vzniká často aj vtedy,
+                    keď účastníci vedia o čo ide. Či je to naozaj tak,
+                    o tom sa môžete presvedčiť v grafe, v ktorom sú spracované Vaše výsledky:</p>
             </div>
-            <div class="col-sm-12 canvas-block baseContainer" id="graph" style="display: none">
-                <canvas class="graph" id="resultGraph" onclick="" width="700" height="500"></canvas>
+            <div class="col-sm-12 canvas-block" id="graph" style="display: none">
+                <canvas class="graph" id="resultGraph" width="700" height="500" style="min-height:300px"></canvas>
             </div>
             <div class="button-start col-sm-12">
                 <button class="btn" id="startExperiment" onclick="beginExperiment()">Štart</button>
             </div>
-            <div id="thankYou" style="display: none">
-                <h3>Ďakujem za vyplnenie testu.</h3>
+            <div id="sendingSuccess" style="text-align: center; display: none">
+                <h5>Výsledky boli úspešne odoslané</h5>
             </div>
         </div>
         <div style="height: 600px"></div>
