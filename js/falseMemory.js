@@ -73,7 +73,7 @@ var correctWordsCount = 0;
 var regularDistractorsCount = 0;
 var specialDistractorsCount = 0;
 
-var timeInterval = 10;
+var timeInterval = 1000;
 
 
 $(document).ready(function () {
