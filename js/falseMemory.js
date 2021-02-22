@@ -73,7 +73,7 @@ var correctWordsCount = 0;
 var regularDistractorsCount = 0;
 var specialDistractorsCount = 0;
 
-var timeInterval = 1000;
+var timeInterval = 10;
 
 
 $(document).ready(function () {
@@ -129,8 +129,9 @@ function finishExperiment() {
     hideButtons();
     $('#canvas').hide();
     $('#graph').fadeIn('fast');
-    $('#thankYou').fadeIn('fast');
-    document.getElementById('startExperiment').innerHTML = 'Odoslať výsledky';
+    // $('#afterTestMargin').show();
+    showAndScrollToElement($('#thankYou'));
+    $('#startExperiment').hide();
 
     var c = document.getElementById("resultGraph").getContext("2d");
 
@@ -188,6 +189,7 @@ function finishExperiment() {
     };
 
     new Chart(c).Bar(data, newopts);
+    sendResults();
 }
 
 function sendResults() {
@@ -227,11 +229,6 @@ function beginExperiment() {
     if (questionSetIndex === keywords.length) {
         finishExperiment();
         questionSetIndex += 1;
-        return;
-    }
-
-    if (questionSetIndex === keywords.length + 1) {
-        sendResults();
         return;
     }
 

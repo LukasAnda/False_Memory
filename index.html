@@ -13,22 +13,21 @@
         <h1>Falošná pamäť </h1>
         <div id="obsah">
             <p>Dobrý deň,</p>
-            <p>Volám sa Natália Bačová a som študentkou 2. ročníka magisterského štúdia na Univerzite Komenského v
+
+            <p>volám sa Natália Bačová a som študentkou 2. ročníka magisterského štúdia na Univerzite Komenského v
                 Bratislave, kde študujem psychológiu.</p>
-            <p>Vitajte v online laboratóriu. Test, ktorý budete dnes vykonávať, bude zameraný na testovanie pamäťových
-                schopností detí a dospelých. Vašimi výsledkami mi pomôžete získať dáta, ktoré sú potrebné pre môj výskum
-                v práci.</p>
-            <p><u>Inštrukcie k testu:</u> po každom stlačení tlačidla ŠTART sa Vám zobrazia slová, 1 slovo za 1 sekundu.
-                Potom sa zobrazia tlačidlá so slovami – vašou úlohou bude označiť tie slová, ktoré ste si zapamätali pri
-                ich zobrazovaní, na poradí nezáleží. Ak už nejaké slovo stlačíte, nedá sa to zmeniť, preto buďte prosím
-                pri ich výbere ostražití. Test obsahuje 6 pokusov a odhadovaný čas testu je 10-15 minút. Po skončení
-                testu sa Vám zobrazia Vaše výsledky spracované v grafe, ktoré sa následne pošlú na môj mail. Prosím
-                rodičov, aby nepomáhali svojim deťom pri vypĺňaní tohto testu, nakoľko by to mohlo skresliť výsledky.
-            </p>
+            <p>Vitajte v mojom online laboratóriu. Test, ktorý budete dnes vykonávať, bude zameraný na testovanie
+                pamäťových schopností detí a dospelých.
+                Vaše výsledky mi pomôžu získať dáta, ktoré sú potrebné pre môj výskum v diplomovej práci.</p>
+
             <p>Máte právo požadovať informácie týkajúce sa výsledkov a výstupov výskumu. Pre ďalšie informácie a
                 objasnenie štúdie je možné ma kontaktovať na email: bacova52@uniba.sk, kde Vám budem k dispozícii.</p>
-            <p>Participácia na výskume je dobrovoľná a bez poplatkov. Získané informácie budú bezpečne uložené,
-                anonymita bude garantovaná a dáta budú použité výlučne na výskumné účely.</p>
+
+            <p>Participácia na výskume je dobrovoľná a bez poplatkov.
+                Získané informácie budú bezpečne uložené, anonymita bude garantovaná a dáta budú použité výlučne na
+                výskumné účely.</p>
+
+            <p>Ak budete súhlasiť s participáciou na výskume objaví sa Vám dotazník a po ňom pamäťový test.</p>
         </div>
         <div id="agreement">
             <h5>Radi by sme Vás požiadali o súhlas participovať na výskume prostredníctvom označenia nasledovnej
@@ -51,13 +50,24 @@
             <h5>Aké je vaše najvyššie dosiahnuté vzdelanie?</h5>
         </div>
         <div class="baseContainer" id="testContainer">
+            <div>
+                <p><u>Inštrukcie k testu:</u></p>
+                <p>Po každom stlačení tlačidla ŠTART sa Vám postupne bude ukazovať rad slov (1 slovo za sekundu). Snažte
+                    sa ich, čo najlepšie zapamätať.
+                    Keď to skončí, objaví sa tabuľka, v ktorej budú aj nové slová. Vašou úlohou je kliknúť na tie slová,
+                    o ktorých ste presvedčení, že boli ukázané, na poradí nezáleží. Ak už na nejaké slovo kliknete,
+                    nedá sa to zmeniť, preto buďte pri ich výbere ostražití. Test obsahuje 6 pokusov a odhadovaný čas
+                    testu
+                    je 10-15 minút. Prosím rodičov, aby nepomáhali svojim deťom pri vypĺňaní tohto testu, nakoľko by to
+                    mohlo skresliť výsledky.</p>
+            </div>
             <div class="col-sm-12 canvas-block">
                 <canvas id="canvas" onclick="" width="500" height="400"></canvas>
             </div>
             <div class="container" id="buttonsContainer"></div>
-            <div id="thankYou" style="display: none">
+            <div id="afterTestMargin" style="height: 300px; display: none"></div>
+            <div id="thankYou" style="display: none; margin-top: 40px">
                 <p>Milé účastníčky, milí účastníci testu,</p>
-
                 <p>ďakujeme za Vašu ochotu a pomoc. Možno ste si všimli, že slová zobrazované v jednotlivých pokusoch
                     boli významovo príbuzné.
                     Na konci každého pokusu sa zobrazila tabuľka slov a bolo treba rozhodnúť, ktoré to boli slová. V
