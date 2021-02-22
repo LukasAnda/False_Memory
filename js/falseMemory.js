@@ -57,9 +57,9 @@ var education = [
     'Bez vzdelania alebo neúplné základné vzdelanie (stále študujem na základnej škole)',
     'Základné',
     'Stredoškolské vzdelanie/ odborné vzdelanie',
-    'Vysokoškolské – bakalársky titul',
-    'Vysokoškolské – magisterský titul',
-    'Vysokoškolské – doktorandský titul alebo vyšší'
+    'Vysokoškolské – prvý stupeň',
+    'Vysokoškolské – druhý stupeň',
+    'Vysokoškolské – tretí stupeň'
 ];
 
 var canvas = document.getElementById('canvas');
